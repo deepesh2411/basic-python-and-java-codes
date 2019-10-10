@@ -1,0 +1,386 @@
+part 1    exception handling
+**********************************************************************************
+
+try:
+    print("deepesh")
+    print(10/0)
+    print("ranjan")
+
+except ZeroDivisionError as e:
+    print("rest of the app")
+
+#ex-2
+
+try:
+    print("deepesh")
+    print(10/0)
+    print("ranjan")
+
+except TypeError as e:   #for the except block is not matched then error occured
+    print("rest of the app")
+
+#ex-3
+try:
+    print("deepesh")
+    print("ranjan")
+
+except ZeroDivisionError as e:   #except blocks are not checked as no exception
+    print("rest of the app")
+
+print("rest of the app new")
+    
+
+#ex-4 only try blocks are not allowed
+
+#ex-5 invalid, inbetwwen try and except statement other decleration are not allowed
+
+#ex-6 whenever exception raised in try block the rest of the app in try will not execute
+
+
+
+part 2
+**********************************************************************************
+
+#else block is executed always when there is no exception in try block
+
+try:
+    x=int(input("enter a number"))
+    print(10/x)
+    print("ranjan")
+except ZeroDivisionError as e:
+    print("rest of the app")
+
+except:                             #default except block
+    print("python for programming")
+else:
+    print("else block")
+#default except block : except without exception
+    
+#default except must be last
+
+#input----0,5,ratan try with ths values to know the things
+
+
+
+part 3
+**********************************************************************************
+ex-1   #try with multiple exception
+-----------------------------------------------------------------
+try:
+    num=int(input("enter a number"))
+    print(10/num)
+    print(10+"ranjan")
+
+except ZeroDivisionError as e:
+    print("ZeroDivisionError")
+
+except ValueError as v:
+    print("ValueError")
+
+except:                                 #default except block
+    print("for all other exception")
+
+else:
+    print("else block")
+
+
+ex-2
+-------------------------------------------------------------------------
+handling multiple exception by using single except
+
+try:
+    num=int(input("enter a number"))
+    print(10/num)
+    print(10+"ranjan")
+
+except (ZeroDivisionError,ValueError) as e:
+    print("ZeroDivisionError or ValueError",e)
+    
+except:                                 #default except block
+    print("for all other exception")
+
+else:
+    print("else block")
+
+
+ex-3 you can use BaseException or Exception
+------------------------------------------------------------------
+try:
+    num=int(input("enter a number"))
+    print(10/num)
+    print(10+"ranjan")
+
+except BaseException as e:
+    print("ZeroDivisionError or ValueError",e)
+else:
+    print("else block")
+
+
+
+note  valid and perfect
+-----------------------------------------------------------------------------
+except (ZeroDivisionError,ValueError) as e:
+except BaseException as e:       parent
+except Exception as e:
+except:
+
+
+ex-4  #the except block order must be child to parent
+----------------------------------------------------------
+case 1  valid and of use
+
+try:
+    num=int(input("enter a number"))
+    print(10/num)
+							#the except block order child to parent 
+except ZeroDivisionError as e:
+    print("ZeroDivisionError or ValueError",e)
+
+except BaseException as e1:
+    print("ZeroDivisionError or ValueError",e1)
+else:
+    print("else block")
+
+case 2 valid but no use
+-------------
+
+try:
+    num=int(input("enter a number"))
+    print(10/num)
+							#the except block order parent to child
+except BaseException as e1:
+    print("ZeroDivisionError or ValueError",e1)
+
+except ZeroDivisionError as e:
+    print("ZeroDivisionError or ValueError",e)
+else:
+    print("else block")
+
+part 4
+********************************************************************************************************
+ex-6  nested try except
+------------------------------------------------
+try:
+    num=int(input("enter a number"))
+    print("inner try")
+    print(10/num)
+    try:
+        print("inner try")
+        print(10+"ranjan")
+    except TypeError as t:
+        print("type error")
+    else:
+        print("inner else block")
+
+except ZeroDivisionError as e:
+    print("ZeroDivisionError or ValueError",e)
+else:
+    print("outer else block")
+print("rest of the application")
+
+
+
+part 5  finally block
+********************************************************************************************************
+case 1
+try:
+    print("try")
+except TypeError as t:
+    print("except",t)
+finally:
+    print("finally")
+
+= RESTART: C:/Users/DE20094713/python scripts/python ratan/video35_part5.py =
+try
+finally
+
+
+case 2
+try:
+    print("try"+10)
+except TypeError as t:
+    print("except",t)
+finally:
+    print("finally")
+
+= RESTART: C:/Users/DE20094713/python scripts/python ratan/video35_part5.py =
+except can only concatenate str (not "int") to str
+finally
+
+
+case 3
+try:
+    print(10/0)
+except TypeError as t:
+    print("except",t)
+finally:
+    print("finally")
+
+= RESTART: C:/Users/DE20094713/python scripts/python ratan/video35_part5.py =
+finally
+ZeroDivisionError: division by zero
+
+
+case 4 invalid
+try:
+    print("try"+10)
+except TypeError as t:
+    print(10/0)
+finally:
+    print("finally")
+
+= RESTART: C:/Users/DE20094713/python scripts/python ratan/video35_part5.py =
+finally
+TypeError: can only concatenate str (not "int") to str
+During handling of the above exception, another exception occurred:
+	print(10/0)
+ZeroDivisionError: division by zero
+
+
+case 5  invalid
+try:
+    print("try"+10)
+except TypeError as t:
+    print("deepesh")
+finally:
+    print("ranjan")
+    print(10/0)
+
+= RESTART: C:/Users/DE20094713/python scripts/python ratan/video35_part5.py =
+deepesh
+ranjan
+    print(10/0)
+ZeroDivisionError: division by zero
+
+
+case 6  valid  :normal termination
+try:
+    print("try")
+finally:
+    print("ranjan")
+
+= RESTART: C:/Users/DE20094713/python scripts/python ratan/video35_part5.py =
+try
+ranjan
+
+
+two cases finally not executed
+
+1.if control not entered in try finally not executed
+print(10/0)
+try:
+    print("try")
+finally:
+    print("ranjan")
+
+2.import os   and calling exit()
+import os
+try:
+    print("try block")
+    os._exit(0)
+finally:
+    print("ranjan")
+= RESTART: C:/Users/DE20094713/python scripts/python ratan/video35_part5.py =
+try block
+
+
+ex-9
+------------------------------------------------------------
+
+def m1():
+    try:
+        return("try")
+    finally:
+        return("finally")
+print(m1())
+
+= RESTART: C:/Users/DE20094713/python scripts/python ratan/video35_part5.py =
+finally
+
+
+
+
+
+part-6  user define exception
+******************************************************************************************
+
+predefine exception:
+		ArithmeticError, ValueError
+user define exception:
+		invalidAgeError,InputMissMatchError
+
+raise: we can raise both
+
+
+raise:  predefine exception  we can write our own message   (not recommended)
+
+ex-1
+---------------------------------------------------------------------
+try:
+    raise ArithmeticError("HI SIR THIS IS DEEPESH")
+except ArithmeticError as ae:
+    print("deepesh",ae)
+
+= RESTART: C:/Users/DE20094713/python scripts/python ratan/video35_part5.py =
+deepesh HI SIR THIS IS DEEPESH
+
+dont disturb the predefine exception cause predefine exception contains fixed meaning
+
+ex-2
+--------------------------------------------------------------------
+def status(age):
+    if age>20:
+        print("eligible for mrg")
+    else:
+        raise ValueError("not eligible for mrg")
+x=int(input("enter the age"))
+status(x)
+
+= RESTART: C:/Users/DE20094713/python scripts/python ratan/video35_part5.py =
+enter the age25
+eligible for mrg
+
+= RESTART: C:/Users/DE20094713/python scripts/python ratan/video35_part5.py =
+enter the age18
+ValueError: not eligible for mrg
+
+
+
+raise : user define exception
+
+step 1: create the exception
+step 2: use the exception in our project
+
+ex-1
+--------------------------------------------------------
+
+class InvalidAgeException(Exception):
+    def __init__(self,msg):
+        self.msg=msg
+
+def status(age):
+    if age>20:
+        print("eligible for mrg")
+    else:
+        raise InvalidAgeException("Invalid age for mrg")
+x=int(input("enter the age : "))
+status(x)
+
+= RESTART: C:/Users/DE20094713/python scripts/python ratan/video35_part5.py =
+enter the age : 25
+eligible for mrg
+
+= RESTART: C:/Users/DE20094713/python scripts/python ratan/video35_part5.py =
+enter the age : 12
+InvalidAgeException: Invalid age for mrg
+>>> 
+
+
+
+
+
+
+
+
+
+

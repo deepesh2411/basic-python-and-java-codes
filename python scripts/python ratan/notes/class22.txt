@@ -1,0 +1,6 @@
+class vs object
+---------------
+1.logical entity used to write logics vs physical entity represent memory
+2.blue print it decide object creation
+3.one class possible to create multiple obj
+4.class keyword

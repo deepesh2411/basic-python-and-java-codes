@@ -1,0 +1,13 @@
+def fun1(x=5,y=0):
+    
+	print(x,y)
+
+fun1()
+
+x,y=10,20
+
+fun1(x,y)
+
+x=100
+
+fun1(x)

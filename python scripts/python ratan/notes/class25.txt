@@ -1,0 +1,71 @@
+class A:
+    __a=10               #private modifier in python __ access within the class
+    def disp(self):
+        print(self.__a)
+a=A()
+a.disp()
+
+
+#print(object.__a) #error
+
+class Myclass():
+    def __disp1(self):
+        print("private method")
+
+    def disp2(self):
+        print("this is disp2 calling disp1")
+        self.__disp1()
+
+c=Myclass()
+c.disp2()       #outside the class not accesseble
+#c.__disp1()   AttributeError: 'Myclass' object has no attribute '__disp1'
+
+
+#ex3
+#private var we can not do modification by using getter and setter we can do it
+#setter are used to set the data and getter is used to get the data
+
+class Emp:
+    __eid=111
+
+    def setEid(self,eid):
+        self.__eid=eid
+
+    def getEid(self):
+        return self.__eid
+
+e=Emp()
+print(e.getEid())
+e.setEid(222)
+print(e.getEid())
+
+#ex-4
+class A:
+    num1,num2=100,200
+class B:
+    def add(self):
+        a=A()                  #creating object in every methods prob
+        print(a.num1+a.num2)
+
+    def mul(self):
+        a=A()
+        print(a.num1*a.num2)
+
+b=B()
+b.add()
+b.mul()
+
+
+class A:
+    num1,num2=10,20
+class B:
+    a=A()                               #class level var
+    def add(self):
+        print(self.a.num1+self.a.num2)  #by using self keyword    
+
+    def mul(self):
+        print(self.a.num1*self.a.num2)
+
+b=B()
+b.add()
+b.mul()
